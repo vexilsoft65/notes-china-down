@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界杯 · 一场生活的奔赴</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(165deg, #fde6d2 0%, #f8d5c0 40%, #f4c9b0 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.2rem;
+            line-height: 1.7;
+            color: #3b2b22;
+        }
+
+        .content-card {
+            max-width: 780px;
+            width: 100%;
+            background: rgba(255, 250, 244, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 40px;
+            padding: 3rem 2.8rem;
+            box-shadow: 0 20px 40px -12px rgba(120, 70, 50, 0.25), 0 8px 16px rgba(0,0,0,0.03);
+            transition: box-shadow 0.3s ease;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 1.2rem; }
+            .content-card { padding: 2.2rem 1.5rem; border-radius: 28px; }
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #5a3629;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+            border-left: 5px solid #d97c5a;
+            padding-left: 1rem;
+        }
+
+        .subhead {
+            font-size: 1rem;
+            color: #8b6b5a;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            border-bottom: 1px dashed #e5cdbc;
+            padding-bottom: 0.8rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .quote-line {
+            background: #f4e4d9;
+            border-left: 4px solid #d97c5a;
+            padding: 1rem 1.4rem;
+            border-radius: 0 20px 20px 0;
+            font-style: normal;
+            color: #4f362b;
+            margin: 2rem 0 1.8rem;
+            font-size: 1rem;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.02);
+        }
+
+        .quote-line::before {
+            content: "📌 提醒自己 · ";
+            font-weight: 500;
+            color: #b56240;
+        }
+
+        a {
+            color: #b56240;
+            text-decoration: none;
+            font-weight: 500;
+            background: #f3e2d6;
+            padding: 0.1rem 0.5rem;
+            border-radius: 30px;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+            display: inline-block;
+        }
+
+        a:hover {
+            background: #d97c5a;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(190, 100, 60, 0.25);
+            transform: scale(1.02);
+        }
+
+        .link-btn {
+            display: inline-block;
+            background: #d97c5a;
+            color: #fffaf4;
+            padding: 0.5rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(190, 100, 60, 0.2);
+            transition: all 0.25s;
+            border: none;
+            cursor: default;
+            margin: 0.2rem 0;
+        }
+
+        .link-btn:hover {
+            background: #c06948;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(160, 80, 50, 0.25);
+        }
+
+        .faq-mini {
+            margin-top: 2.5rem;
+            padding-top: 1.8rem;
+            border-top: 1px solid #e9d3c4;
+        }
+
+        .faq-mini h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #5a3629;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .faq-mini details {
+            background: #f7ede6;
+            border-radius: 40px;
+            padding: 0.6rem 1.2rem;
+            margin-bottom: 0.7rem;
+            border: 1px solid #e9d3c4;
+            transition: background 0.15s;
+        }
+
+        .faq-mini details[open] {
+            background: #f2e0d4;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            color: #4f362b;
+            cursor: pointer;
+            padding: 0.3rem 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .faq-mini summary::marker {
+            content: "";
+        }
+
+        .faq-mini summary::before {
+            content: "▸";
+            color: #d97c5a;
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        .faq-mini details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .faq-mini p {
+            margin: 0.5rem 0 0.2rem 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-note {
+            margin-top: 2.8rem;
+            font-size: 0.9rem;
+            color: #8b6b5a;
+            text-align: center;
+            letter-spacing: 0.4px;
+            border-top: 1px solid #ecdacd;
+            padding-top: 1.5rem;
+        }
+
+        .footer-note span {
+            background: #f0dcd0;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+        }
+
+        strong {
+            color: #4f362b;
+        }
+    </style>
+</head>
+<body>
+<div class="content-card">
+    <h1>世界杯，不止在屏幕里</h1>
+    <div class="subhead">一篇关于热望与日常的笔记 · 2025</div>
+
+    <p>
+        说起来有些不可思议，每隔四年，全世界好像都同时患上了一种“熬夜综合症”。闹钟定在凌晨三点，冰箱里塞满汽水和零食，第二天顶着黑眼圈却还要跟同事争论某个进球是否越位。这种集体性的狂热，似乎总能把最平淡的日子拧成一股绳——而绳头就系在<a href="https://china-down-shijiebei.com">世界杯</a>这个名字上。
+    </p>
+
+    <p>
+        但我渐渐发现，人们真正迷恋的，其实不只是绿茵场上的输赢。那些在酒吧里一起呐喊的陌生人，那些在朋友圈刷屏的搞笑动图，甚至小区楼下小孩模仿进球后滑跪的动作——这些细碎的片段，反而比决赛比分更长久地留在记忆里。足球像一种通用的方言，让原本没有交集的人，突然有了共同的笑点和泪点。
+    </p>
+
+    <div class="quote-line">
+        也许我们爱的从来不是冠军，而是那个愿意为某件事全力呐喊的自己。
+    </div>
+
+    <p>
+        前阵子整理旧物，翻出2010年南非世界杯时手写的一份赛程表，纸张已经泛黄，边角还沾着咖啡渍。上面用荧光笔圈出了好几场淘汰赛，旁边潦草地写着“请假看球！”的字样。那时候总觉得，世界杯是生活里一个隆重的节日，值得为此调整一切日程。现在回头看，节日其实不在于那一个月，而在于你愿意为它腾出的那些空隙——即便只是深夜客厅里的一盏小灯和一杯温水。
+    </p>
+
+    <p>
+        身边不少朋友习惯在世界杯期间约局，哪怕平时根本不看联赛。他们笑着说“凑个热闹”，但我知道，他们凑的是那种“所有人同时为一件事心跳加速”的氛围。这种氛围无法被精准描述，却像夏日傍晚的风，你一旦感受过，就会在下一个赛季来临时莫名期待。
+    </p>
+
+    <p>
+        如果你也想找一处安静的角落，好好重温或了解关于<a href="https://china-down-shijiebei.com" class="link-btn">世界杯</a>的点点滴滴，不妨去那个网站看看。没有花哨的弹窗，没有夸张的标语，只是把那些值得被记住的瞬间、数据和故事，妥帖地放在一起。像一份老朋友整理好的剪报，翻开时总会有惊喜。
+    </p>
+
+    <div class="faq-mini">
+        <h3>❓ 几个你可能想过的问题</h3>
+
+        <details>
+            <summary>为什么世界杯总能让人情绪起伏那么大？</summary>
+            <p>大概因为它把“不确定性”浓缩在了九十分钟里。生活中很少有事情能在这么短的时间内给你极致的期待、失落、狂喜或释然。而且这种体验是共享的——你周围有成千上万的人此刻和你一样。</p>
+        </details>
+
+        <details>
+            <summary>不懂足球的人也能享受世界杯吗？</summary>
+            <p>完全可以。你可以关注球场外的花絮、球迷文化、各国美食，或者仅仅享受那种“全世界都在做同一件事”的奇妙感觉。很多从不看球的人，最后都记住了某个进球或某段解说词。</p>
+        </details>
+
+        <details>
+            <summary>怎么看球才能既尽兴又不影响第二天上班？</summary>
+            <p>挑最关键的几场看直播，其他的看回放或集锦。提前规划好睡眠时间，赛前小睡半小时。另外，记得把手机通知暂时关掉——剧透比闹钟更让人崩溃。</p>
+        </details>
+    </div>
+
+    <div class="footer-note">
+        <span>⚽ 世界很大，球场很小，但快乐刚好装得下</span><br>
+        <span style="background: none; padding:0; font-size:0.8rem; opacity:0.6;">— 从容看球，认真生活 —</span>
+    </div>
+</div>
+</body>
+</html>
